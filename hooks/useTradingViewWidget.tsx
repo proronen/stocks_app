@@ -12,7 +12,7 @@ const useTradingViewWidget = (
     if (!containerRef.current) return;
     if (containerRef.current.dataset.loaded) return;
 
-    containerRef.current.innerHTML = `<div class="tradingview-widget-container__widget" style="width: 100%; height: ${height} "></div>`;
+    containerRef.current.innerHTML = `<div class="tradingview-widget-container__widget" style="width: 100%; height: ${height}px "></div>`;
 
     const script = document.createElement("script");
     script.src = scriptUrl;
@@ -22,10 +22,12 @@ const useTradingViewWidget = (
     containerRef.current.appendChild(script);
     containerRef.current.dataset.loaded = 'true';
 
+    const container = containerRef.current;
+
     return () => {
-        if(containerRef.current) {
-            containerRef.current.innerHTML = "";
-            delete containerRef.current.dataset.loaded;
+        if(container) {
+            container.innerHTML = "";
+            delete container.dataset.loaded;
         }
     }
 
