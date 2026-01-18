@@ -36,6 +36,8 @@ export const CONDITION_OPTIONS = [
     { value: 'less', label: 'Less than (<)' },
 ];
 
+export const SCRIPT_URL = 'https://s3.tradingview.com/external-embedding/embed-widget-';
+
 // TradingView Charts
 export const MARKET_OVERVIEW_WIDGET_CONFIG = {
     colorTheme: 'dark', // dark mode
