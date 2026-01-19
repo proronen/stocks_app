@@ -18,7 +18,6 @@ const SelectWithSearch = ({
   placeholder,
   options,
   control,
-  error,
   required = false,
   noResults = "No results found",
 }: SelectFieldProps) => {
@@ -34,7 +33,7 @@ const SelectWithSearch = ({
         name={name}
         control={control}
         rules={{
-          required: required ? `Please select ${label.toLowerCase}` : false,
+          required: required ? `Please select ${label.toLowerCase()}` : false,
         }}
         render={({ field }) => (
           <>
@@ -48,7 +47,6 @@ const SelectWithSearch = ({
                 >
                   {field.value ? (
                     <span className="flex items-center gap-2">
-                      {/* <span>{getFlagEmoji(field.)}</span> */}
                       <span>
                         {options.find((c) => c.value === field.value)?.label}
                       </span>

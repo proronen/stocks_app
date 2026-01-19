@@ -10,7 +10,7 @@ const SignIn = () => {
     register,
     handleSubmit,
     formState: {errors, isSubmitting}
-    } = useForm<SignUpFormData>({
+    } = useForm<SignInFormData>({
     defaultValues: {
       email: '',
       password: '',
@@ -18,9 +18,9 @@ const SignIn = () => {
     mode: "onBlur"
   });
 
-  const onSubmit: SubmitHandler<SignUpFormData> = async (data: SignUpFormData) => {
+  const onSubmit: SubmitHandler<SignInFormData> = async (data: SignUpFormData) => {
     try {
-      console.log(data)
+      // TODO: call auth endpoint
     } catch (e) {
       console.error(e);
     }
@@ -37,7 +37,7 @@ const SignIn = () => {
           placeholder="something@gmail.com"
           register={register}
           error={errors.email}
-          validation={{required1: 'Email is required', pattern: {value: /^\w+@\w+\.\w+$/, message: 'Email address is not valid'}}}
+          validation={{required: 'Email is required', pattern: {value: /^\w+@\w+\.\w+$/, message: 'Email address is not valid'}}}
         />
 
         <InputField 
@@ -47,7 +47,7 @@ const SignIn = () => {
           type="password"
           register={register}
           error={errors.password}
-          validation={{required1: 'Pasword is required', minLength: {value: 8, message: "Please enter more then 8 characters"}}}
+          validation={{required: 'Pasword is required', minLength: {value: 8, message: "Please enter more then 8 characters"}}}
         />
         
 
@@ -55,7 +55,7 @@ const SignIn = () => {
           {isSubmitting ? 'Signing in' : 'Sign in'}
         </Button>
 
-        <FooterLink text="Dont have an account?" linkText="Sign up now" href="/sign-up" />
+        <FooterLink text="Still don't have an account?" linkText="Sign up now" href="/sign-up" />
 
      </form>
     </>
