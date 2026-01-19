@@ -3,9 +3,12 @@ import InputField from "@/components/forms/InputField";
 import { Button } from "@/components/ui/button";
 import { SubmitHandler, useForm } from "react-hook-form"
 import FooterLink from "@/components/forms/FooterLink";
+import { sigInWithEmail } from "@/lib/actions/auth.actions";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const SignIn = () => {
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -18,12 +21,15 @@ const SignIn = () => {
     mode: "onBlur"
   });
 
-  const onSubmit: SubmitHandler<SignInFormData> = async (data: SignUpFormData) => {
+  const onSubmit: SubmitHandler<SignInFormData> = async (data: SignInFormData) => {
     try {
-      // TODO: call auth endpoint
+      const result = await sigInWithEmail(data);
+      if(result?.success) router.push('/')
     } catch (e) {
       console.error(e);
+      toast.error('Sign in failed', {description: e instanceof Error ? e.message : 'failed to sign in, please check your credentials or contact support'});
     }
+
   }; 
 
   return (
