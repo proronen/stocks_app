@@ -1,6 +1,11 @@
 import { countries } from "countries-list";
-import { useMemo, useState } from "react";
 import SelectWithSearch from "./forms/SelectWithSearch";
+
+const countryCodes = Object.keys(countries);
+const COUNTRY_OPTIONS = Object.values(countries).map((item, i) => ({
+  label: item.name,
+  value: countryCodes[i],
+}));
 
 const CountriesList = ({
   name,
@@ -9,32 +14,12 @@ const CountriesList = ({
   error,
   control,
 }: Omit<SelectFieldProps, "options">) => {
-  const options = useMemo(() => {
-    const countryCodes = Object.keys(countries);
-    return Object.values(countries).map((item, i) => ({
-      label: item.name,
-      value: countryCodes[i],
-    }));
-  }, []);
-
-  const getFlagEmoji = (countryCode: string) => {
-    if(!countryCode) return;
-    console.log('====================================');
-    console.log(countryCode);
-    console.log('====================================');
-    const codePoints = countryCode
-        .toUpperCase()
-        .split('')
-        .map((char) => 127397 + char.charCodeAt(0));
-    return String.fromCodePoint(...codePoints)  as unknown as void;
-};
-
   return (
     <SelectWithSearch
       name={name}
       label={label}
       placeholder={placeholder}
-      options={options}
+      options={COUNTRY_OPTIONS}
       control={control}
       error={error}
     />
